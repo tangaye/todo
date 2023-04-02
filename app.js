@@ -44,17 +44,17 @@ todosEl.addEventListener("click", function (event) {
 	const targetEl = event.target;
 	const targetClassList = Array.from(targetEl.classList);
 
-	if (targetClassList.includes("delete-todo")) {
-		targetEl.parentElement.parentElement.remove();
-	}
-
-	if (targetClassList.includes("complete-todo")) {
-		targetEl.parentElement.parentElement.classList.toggle("completed");
-	}
-
-	if (targetClassList.includes("todo-item")) {
-		todoEl.value = targetEl.firstElementChild.innerText;
-		elementToUpdate = targetEl;
-		mode = "update";
+	switch (targetClassList) {
+		case targetClassList.includes("delete-todo"):
+			targetEl.parentElement.parentElement.remove();
+			break;
+		case targetClassList.includes("complete-todo"):
+			targetEl.parentElement.parentElement.classList.toggle("completed");
+			break;
+		case targetClassList.includes("todo-item"):
+			todoEl.value = targetEl.firstElementChild.innerText;
+			elementToUpdate = targetEl;
+			mode = "update";
+			break;
 	}
 });
