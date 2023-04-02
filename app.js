@@ -9,7 +9,7 @@ let elementToUpdate;
  * Keypress: For keys that produce character values. Deprecated
  */
 document.addEventListener("keyup", function (event) {
-	if (event.code === "Enter" && mode === "create") {
+	if ((event.code === "Enter" || event.keyCode === 13) && mode === "create") {
 		todosEl.insertAdjacentHTML(
 			"afterbegin",
 			`
@@ -26,7 +26,7 @@ document.addEventListener("keyup", function (event) {
 		todoEl.value = "";
 	}
 
-	if (event.code === "Enter" && mode === "update") {
+	if (event.code === "Enter" || (event.keyCode === 13 && mode === "update")) {
 		elementToUpdate.innerHTML = `
 		<span class="todo-text">${todoEl.value} </span>
 		<span class="todo-actions">
