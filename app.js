@@ -9,6 +9,7 @@ let elementToUpdate;
  * Keypress: For keys that produce character values. Deprecated
  */
 document.addEventListener("keyup", function (event) {
+	console.log("TEST FOR MOBILE: ", event.key);
 	if ((event.code === "Enter" || event.keyCode === 13) && mode === "create") {
 		todosEl.insertAdjacentHTML(
 			"afterbegin",
