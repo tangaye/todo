@@ -7,7 +7,9 @@
 		<title>Todo List App</title>
 		<style>
 			@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-			* {
+			*,
+			*::after,
+			*::before {
 				margin: 0;
 				padding: 0;
 				box-sizing: border-box;
@@ -33,7 +35,6 @@
 
 			input {
 				border: 2px solid #dddddd;
-				border-radius: 10px;
 				font-size: 25px;
 				padding: 10px;
 			}
@@ -44,9 +45,8 @@
 
 			#todos {
 				background-color: #fff;
-				border: 1px solid red;
-				border-radius: 10px solid red;
 				list-style: none;
+				border: 2px solid #dddddd;
 			}
 			.todo-item {
 				padding: 15px 10px;
