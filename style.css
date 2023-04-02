@@ -67,7 +67,7 @@ input {
 .delete-todo {
 	cursor: pointer;
 	font-size: 20px;
-	padding-left: 5px;
+	padding-left: 10px;
 }
 
 /* Tablet Styles */
