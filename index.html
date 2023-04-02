@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Todo List App</title>
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+				font-family: "Poppins", serif;
+			}
+
+			header {
+				height: 200px;
+				background-color: #e5e5f7;
+				opacity: 0.8;
+				background: repeating-linear-gradient(
+					45deg,
+					#444cf7,
+					#444cf7 5px,
+					#e5e5f7 5px,
+					#e5e5f7 25px
+				);
+				padding: 40px 20px;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+
+			input {
+				border: 2px solid #dddddd;
+				border-radius: 10px;
+				font-size: 25px;
+				padding: 10px;
+			}
+
+			.todos-container {
+				padding: 20px;
+			}
+
+			#todos {
+				background-color: #fff;
+				border: 1px solid red;
+				border-radius: 10px solid red;
+				list-style: none;
+			}
+			.todo-item {
+				padding: 15px 10px;
+				border-bottom: 2px solid #dddddd;
+				display: flex;
+				justify-content: space-between;
+				cursor: pointer;
+			}
+
+			/* Completed todos styles*/
+			.todo-item.completed {
+				cursor: not-allowed;
+				background-color: #f1f0f0;
+			}
+
+			.todo-item.completed .todo-text {
+				color: #c5c3c3;
+				text-decoration: line-through;
+			}
+			/* End of completed todos styles */
+
+			.todo-item:last-child {
+				border-bottom: none;
+			}
+
+			.todo-item .todo-text {
+				font-size: 20px;
+			}
+
+			.complete-todo,
+			.delete-todo {
+				cursor: pointer;
+				font-size: 20px;
+				padding-left: 5px;
+			}
+
+			/* Tablet Styles */
+			@media only screen and (min-width: 401px) {
+				header {
+					padding: 40px 30px;
+				}
+
+				.todos-container {
+					padding: 20px 30px;
+				}
+			}
+
+			/* Desktop Styles */
+			@media only screen and (min-width: 768px) {
+				header {
+					padding: 40px 150px;
+				}
+
+				.todos-container {
+					padding: 20px 150px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<header>
+				<input id="todo" type="text" placeholder="Ready to grind? 💪" />
+			</header>
+			<section class="todos-container">
+				<ol id="todos">
+					<li class="todo-item">
+						<span class="todo-text">Sleep </span>
+						<span class="todo-actions">
+							<span class="complete-todo">✅</span>
+							<span class="delete-todo">❌</span>
+						</span>
+					</li>
+					<li class="todo-item completed">
+						<span class="todo-text">Eat </span>
+						<span class="todo-actions">
+							<span class="complete-todo">✅</span>
+							<span class="delete-todo">❌</span>
+						</span>
+					</li>
+				</ol>
+			</section>
+		</main>
+		<script src="./app.js"></script>
+	</body>
+</html>
