@@ -39,6 +39,7 @@ document.addEventListener("click", function (event) {
 function toggleSearchBox() {
 	searchBoxEl.value = "";
 	searchBoxEl.classList.toggle("hidden");
+	searchBoxEl.focus();
 }
 
 function addTodo() {
