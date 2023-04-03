@@ -1,5 +1,5 @@
 const todoEl = document.querySelector("#todo");
-const todosEl = document.querySelector("#todos");
+const todoListEl = document.querySelector("#todos");
 const searchBoxEl = document.querySelector(".search-box");
 
 let mode = "create";
@@ -8,6 +8,19 @@ let elementToUpdate;
 document.addEventListener("keyup", function (event) {
 	if (event.key === "Enter" && mode === "update") updateTodo();
 	if (event.key === "Enter" && mode === "create") addTodo();
+});
+
+searchBoxEl.addEventListener("keyup", function (event) {
+	for (let i = 0; i < todoListEl.children.length; i++) {
+		const listItem = todoListEl.children[i].firstElementChild;
+		const listItemText = listItem.innerText.toLowerCase();
+
+		if (listItemText.includes(searchBoxEl.value.toLowerCase())) {
+			listItem.parentElement.style.display = "flex";
+		} else {
+			listItem.parentElement.style.display = "none";
+		}
+	}
 });
 
 document.addEventListener("click", function (event) {
@@ -28,7 +41,9 @@ function toggleSearchBox() {
 }
 
 function addTodo() {
-	todosEl.insertAdjacentHTML(
+	if (todoEl.value.length === 0) return;
+
+	todoListEl.insertAdjacentHTML(
 		"afterbegin",
 		`
 		<li class="todo-item">
@@ -53,6 +68,8 @@ function completeTodo(todo) {
 }
 
 function updateTodo() {
+	if (todoEl.value.length === 0) return;
+
 	elementToUpdate.innerHTML = `
 		<span class="todo-text">${todoEl.value} </span>
 		<span class="todo-actions">
