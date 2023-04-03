@@ -19,13 +19,14 @@ header {
 		#e5e5f7 5px,
 		#e5e5f7 25px
 	);
+
 	padding: 40px 20px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
 
-input {
+#todo {
 	border: 2px solid #dddddd;
 	font-size: 25px;
 	padding: 10px;
@@ -64,20 +65,38 @@ input {
 }
 
 .complete-todo,
-.delete-todo {
+.delete-todo,
+.search-icon {
 	cursor: pointer;
-	font-size: 20px;
+	font-size: 25px;
 	padding-left: 10px;
+}
+
+.search-container {
+	display: flex;
+	justify-content: end;
+	padding-bottom: 10px;
+}
+
+.search-container .search-box {
+	border: 2px solid #dddddd;
+	font-size: 15px;
+	padding: 5px;
+	width: 25em;
+}
+
+.search-box.hidden {
+	display: none;
 }
 
 /* Tablet Styles */
 @media only screen and (min-width: 401px) {
 	header {
-		padding: 40px 30px;
+		padding: 40px 20px;
 	}
 
 	.todos-container {
-		padding: 20px 30px;
+		padding: 20px 20px;
 	}
 }
 

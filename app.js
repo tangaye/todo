@@ -1,33 +1,59 @@
 const todoEl = document.querySelector("#todo");
 const todosEl = document.querySelector("#todos");
+const searchBoxEl = document.querySelector(".search-box");
+
 let mode = "create";
 let elementToUpdate;
 
-/**
- * Keydown: When a key is pressed. Fired continously
- * Keyup: When a key is released
- * Keypress: For keys that produce character values. Deprecated
- */
 document.addEventListener("keyup", function (event) {
-	if (event.key === "Enter" && mode === "create") {
-		todosEl.insertAdjacentHTML(
-			"afterbegin",
-			`
-	        <li class="todo-item">
-				<span class="todo-text">${todoEl.value} </span>
-				<span class="todo-actions">
-					<span class="complete-todo">✅</span>
-					<span class="delete-todo">❌</span>
-				</span>
-			</li>
-	    `
-		);
+	if (event.key === "Enter" && mode === "update") updateTodo();
+	if (event.key === "Enter" && mode === "create") addTodo();
+});
 
-		todoEl.value = "";
-	}
+document.addEventListener("click", function (event) {
+	const targetEl = event.target;
+	const targetClassList = Array.from(targetEl.classList);
 
-	if (event.key === "Enter" && mode === "update") {
-		elementToUpdate.innerHTML = `
+	if (targetClassList.includes("delete-todo")) removeTodo(targetEl);
+
+	if (targetClassList.includes("complete-todo")) completeTodo(targetEl);
+
+	if (targetClassList.includes("todo-item")) prepareUpdate(targetEl);
+
+	if (targetClassList.includes("search-icon")) toggleSearchBox();
+});
+
+function toggleSearchBox() {
+	searchBoxEl.classList.toggle("hidden");
+}
+
+function addTodo() {
+	todosEl.insertAdjacentHTML(
+		"afterbegin",
+		`
+		<li class="todo-item">
+			<span class="todo-text">${todoEl.value} </span>
+			<span class="todo-actions">
+				<span class="complete-todo">✅</span>
+				<span class="delete-todo">❌</span>
+			</span>
+		</li>
+	`
+	);
+
+	resetInput();
+}
+
+function removeTodo(todo) {
+	todo.closest(".todo-item").remove();
+}
+
+function completeTodo(todo) {
+	todo.closest(".todo-item").classList.toggle("completed");
+}
+
+function updateTodo() {
+	elementToUpdate.innerHTML = `
 		<span class="todo-text">${todoEl.value} </span>
 		<span class="todo-actions">
 			<span class="complete-todo">✅</span>
@@ -35,26 +61,17 @@ document.addEventListener("keyup", function (event) {
 		</span>
 		`;
 
-		todoEl.value = "";
-		mode = "create";
-	}
-});
+	mode = "update";
 
-todosEl.addEventListener("click", function (event) {
-	const targetEl = event.target;
-	const targetClassList = Array.from(targetEl.classList);
+	resetInput();
+}
 
-	if (targetClassList.includes("delete-todo")) {
-		targetEl.parentElement.parentElement.remove();
-	}
+function prepareUpdate(todo) {
+	todoEl.value = todo.firstElementChild.innerText;
+	elementToUpdate = todo;
+	mode = "update";
+}
 
-	if (targetClassList.includes("complete-todo")) {
-		targetEl.parentElement.parentElement.classList.toggle("completed");
-	}
-
-	if (targetClassList.includes("todo-item")) {
-		todoEl.value = targetEl.firstElementChild.innerText;
-		elementToUpdate = targetEl;
-		mode = "update";
-	}
-});
+function resetInput() {
+	todoEl.value = "";
+}
